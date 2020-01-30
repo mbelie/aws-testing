@@ -1,0 +1,42 @@
+<html>
+<head>
+</head>
+<body>
+    <div id="amazon-root"></div>
+    <a href id="LoginWithAmazon">
+        <img border="0" alt="Login with Amazon"
+             src="https://images-na.ssl-images-amazon.com/images/G/01/lwa/btnLWA_gold_156x32.png"
+             width="156" height="32" />
+    </a>
+    <script type="text/javascript">
+        window.onAmazonLoginReady = function () {
+            // TODO: Make a note of where this comes from. Amazon dev application?
+            amazon.Login.setClientId('amzn1.application-oa2-client.71cf5ed037bb4e5e888f1a901f8bd056');
+        };
+
+        (function (d) {
+            var a = d.createElement('script'); a.type = 'text/javascript';
+            a.async = true; a.id = 'amazon-login-sdk';
+            a.src = 'https://assets.loginwithamazon.com/sdk/na/login1.js';
+            d.getElementById('amazon-root').appendChild(a);
+        })(document);
+    </script>
+
+    <script type="text/javascript">
+        document.getElementById('LoginWithAmazon').onclick = function () {
+            var options = {}
+            options.scope = 'profile';
+            options.scope_data = {
+                'profile': { 'essential': false }
+            };
+
+            // NOTE: Could set response page as index.html and pull the access token from the url. Either way, the token needs
+            // to be used to fetch temporary credentials and access the appropriate SDK target (eg: MQTT or other).
+            // TODO: Determine if the return url also has to be specified in the corresponding Amazon app
+            amazon.Login.authorize(options,
+                'https://mbelie.github.io/aws-testing/login-response.html');
+            return false;
+        };
+    </script>
+</body>
+</html>
