@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="UTF-8">
+   </head>
+   <body>
+      <script src="https://sdk.amazonaws.com/js/aws-sdk-2.610.0.min.js"></script>
+      <script type="text/javascript">
+         // Initialize the Amazon Cognito credentials provider
+         AWS.config.region = 'us-west-2'; 
+         AWS.config.credentials = new AWS.CognitoIdentityCredentials({IdentityPoolId: 'us-west-2:ea0a8a30-108b-4803-bee9-46ba4cd2c121'});
+      	
+         // TODO: Add MQTT service call(s) here   
+      </script>
+   </body>
+</html>
