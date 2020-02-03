@@ -1,0 +1,34 @@
+html, body{
+    height:100%;
+}
+
+.fill-v {
+    height:100%;
+}
+
+.center {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.bs-icon {
+    display: inline-block;
+    fill: none;
+    margin: 0.2em;
+    font-size: 1em;
+    width: 1em;
+    stroke-width: inherit;
+    stroke-linecap: inherit;
+    stroke-linejoin: inherit;
+    overflow: visible;
+}
+
+.connected{
+    stroke:green;
+}
+
+.disconnected{
+    stroke:gray;
+}
