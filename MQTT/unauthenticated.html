@@ -1,16 +1,55 @@
 <!DOCTYPE html>
 <html>
-   <head>
-      <meta charset="UTF-8">
-   </head>
+    <head>
+        <meta charset="UTF-8">
+
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+        <link 
+        rel="stylesheet" 
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" 
+        crossorigin="anonymous">
+
+        <link 
+        rel="stylesheet" 
+        href="styles.css">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    </head>
    <body>
-      <script src="https://sdk.amazonaws.com/js/aws-sdk-2.610.0.min.js"></script>
-      <script type="text/javascript">
-         // Initialize the Amazon Cognito credentials provider
-         AWS.config.region = 'us-west-2'; 
-         AWS.config.credentials = new AWS.CognitoIdentityCredentials({IdentityPoolId: 'us-west-2:ea0a8a30-108b-4803-bee9-46ba4cd2c121'});
-      	
-         // TODO: Add MQTT service call(s) here   
-      </script>
+        <div class="center fill-v" id="vueApp">
+           
+            <div class="container" style="margin:auto;">
+                <div class="form-group">
+                    <label for="duration"><h3>Duration (ms):</h3></label>
+                    <div class="input-group">
+                        <div class="center">
+                            <span class="input-group-prepend" v-bind:title="isConnected ? 'Connected' : 'Disconnected'">
+                                <svg class="bs-icon" viewBox="0 0 32 32" v-bind:class="{ connected: isConnected, disconnected: !isConnected }">
+                                    <path d="M18 13 L26 2 8 13 14 19 6 30 24 19 Z"></path>
+                                </svg>
+                            </span>
+                        </div>
+                        <input type="text" id="duration" class="form-control" placeholder="Duration (ms)" v-model="duration" />
+                        <div class="input-group-append">
+                            <button v-bind:class="{btn:true, 'btn-primary':isConnected, 'btn-secondary':!isConnected }" v-on:click="publish()" v-bind:disabled="!isConnected">Submit</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="messages"><h3>Log:</h3></label>
+                    <div v-for="(value,index) in messages" v-if="index < 10" class="font-weight-lighter">
+                        {{value}}
+                    </div>
+                </div>                
+            </div>
+        </div>     
+        
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="bundle.js"></script>
    </body>
 </html>
