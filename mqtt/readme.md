@@ -1,2 +1,2 @@
 # MQTT Demo
-A simple use of MQTT with a JavaScript web client and a Python IoT device
+Demonstrates simple usage of MQTT (via AWS) with a JavaScript web client and a Python IoT device
