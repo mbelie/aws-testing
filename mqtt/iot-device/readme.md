@@ -1,7 +1,11 @@
 ## IoT Device Code
 
 ### Summary
-source/main.py is a simple Python script that subsribes to a specific MQTT topic via AWS IoT. Payloads are expected to be in the format <code>{"duration": 5000}</code>. When a payload is received, the duration is extracted and used to toggle some GPIOs for the period specified in duration. After the duration has elapsed, the GPIOs are set back. The companion web-client directory can be used to publish payloads to the same topic as that referenced in main.py.
+source/main.py is a simple Python script that subsribes to a specific MQTT topic via AWS IoT. Payloads are expected to be in the format:
+```json
+{ "duration": 5000 }
+```
+When a payload is received, the duration is extracted and used to toggle some GPIOs for the period specified in duration. After the duration has elapsed, the GPIOs are set back. The companion web-client directory can be used to publish payloads to the same topic as that referenced in main.py.
 
 ### Balena Install Instructions
 + Setup a Balena account if you don't already have one
@@ -22,5 +26,5 @@ source/main.py is a simple Python script that subsribes to a specific MQTT topic
 
 
 -----
-1. Found that Balena Etcher had problems on Mac/Catalina and Windows 10 using installers. The portable version works on Windows 10.
+1. Found that Balena Etcher had problems (blanks screen) on Mac/Catalina and Windows 10 using installers. The portable version works on Windows 10.
 
