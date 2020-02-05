@@ -7,7 +7,7 @@ source/main.py is a simple Python script that subsribes to a specific MQTT topic
 ```
 When a payload is received, the duration is extracted and used to toggle some GPIOs for the period specified in duration. After the duration has elapsed, the GPIOs are set back. The companion web-client directory can be used to publish payloads to the same topic as that referenced in main.py.
 
-### Balena Install Instructions
+### Balena Application & Device Setup
 + Setup a Balena account if you don't already have one
 + Create a new application and setup a device in the Balena dashboard (instructions [here](https://www.balena.io/docs/learn/getting-started/raspberrypi3/python/))
 + Creating a device in the Balena dashboard results in a downloadable image
