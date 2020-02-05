@@ -1,7 +1,4 @@
-time
 uuid
 boto3
-json
-signal
-RPi.GPIO
+gpiozero
 AWSIoTPythonSDK

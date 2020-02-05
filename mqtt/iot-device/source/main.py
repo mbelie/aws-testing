@@ -3,18 +3,20 @@ import uuid
 import boto3
 import json
 import signal
-import RPi.GPIO as gpio
+import gpiozero
 from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
 
-ledPin = 11
-relayPin = 7
+ledGpioId = 17
+relayGpioId = 4
+
+relay = gpio.OutputDevice(relayGpioId, active_high=False, initial_value=False)
+led = gpio.OutputDevice(ledGpioId, active_high=True, initial_value=False)
 
 # Topic to subscribe to. Same as what web-client is publishing to
 topic = "3669"
 clientId = str(uuid.uuid1())
 mqttClient = AWSIoTMQTTClient(clientId)
 
-# Substitute the host from AWS IoT
 endpoint = "<endpoint from IoT Settings>"
 port = 443
 region = "<region>"
@@ -22,13 +24,13 @@ poolId = "<region>:<pool id>"
 rootCaPath = "<path on IoT device to root pem>"
 
 def Energize(durationMs):
-    gpio.output(ledPin, True)
-    gpio.output(relayPin, False)
+    relay.on()
+    led.on()
 
     time.sleep(durationMs/1000)
     
-    gpio.output(ledPin, False)
-    gpio.output(relayPin, True)
+    relay.off()
+    led.off()
 
 def MessageReceived(client, userData, message):
     temp = json.loads(message.payload)
@@ -43,13 +45,6 @@ def Cleanup():
 def Setup():
     # Cleanup
     signal.signal(signal.SIGTERM, Cleanup)
-
-    # GPIO
-    gpio.setmode(gpio.BOARD)
-    gpio.setup(ledPin, gpio.OUT)
-    gpio.setup(relayPin, gpio.OUT)
-    gpio.output(ledPin, False)
-    gpio.output(relayPin, True)
 
     # MQTT
     cognitoIdentityClient = boto3.client('cognito-identity', region_name=region)
