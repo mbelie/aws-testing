@@ -6,45 +6,57 @@ import signal
 import gpiozero
 from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
 
-ledGpioId = 17
+durationLedGpioId = 17
+activeLedGpioId = 27
 relayGpioId = 4
 
-relay = gpio.OutputDevice(relayGpioId, active_high=False, initial_value=False)
-led = gpio.OutputDevice(ledGpioId, active_high=True, initial_value=False)
+relay = gpiozero.OutputDevice(relayGpioId, active_high=False, initial_value=False)
+durationLed = gpiozero.OutputDevice(durationLedGpioId, active_high=True, initial_value=False)
+activeLed = gpiozero.OutputDevice(activeLedGpioId, active_high=True, initial_value=False)
 
 # Topic to subscribe to. Same as what web-client is publishing to
 topic = "3669"
 clientId = str(uuid.uuid1())
 mqttClient = AWSIoTMQTTClient(clientId)
 
-endpoint = "<endpoint from IoT Settings>"
 port = 443
+endpoint = "<endpoint from IoT Settings>"
 region = "<region>"
 poolId = "<region>:<pool id>"
 rootCaPath = "<path on IoT device to root pem>"
 
 def Energize(durationMs):
     relay.on()
-    led.on()
+    durationLed.on()
 
     time.sleep(durationMs/1000)
     
     relay.off()
-    led.off()
+    durationLed.off()
 
 def MessageReceived(client, userData, message):
-    temp = json.loads(message.payload)
+    payload = message.payload.decode("utf-8")
+    print("payload: {}".format(payload))
+    temp = json.loads(payload)
     durationMs = int(temp["duration"])
     print("Energizing for {}ms".format(durationMs))
     Energize(durationMs)
 
-
 def Cleanup():
-    gpio.cleanup()
+    activeLed.off()
+    durationLed.off()
+    relay.off()
+
+    activeLed.close()
+    durationLed.close()
+    relay.close()
 
 def Setup():
     # Cleanup
     signal.signal(signal.SIGTERM, Cleanup)
+
+    # Stat
+    activeLed.on()
 
     # MQTT
     cognitoIdentityClient = boto3.client('cognito-identity', region_name=region)
@@ -84,4 +96,4 @@ Setup()
 while True:
     time.sleep(2)
 
-gpio.cleanup()
+Cleanup()
