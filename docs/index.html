@@ -32,16 +32,16 @@
                                 </svg>
                             </span>
                         </div>
-                        <input type="text" id="duration" class="form-control" placeholder="Duration (ms)" v-model="duration" />
-                        <div class="input-group-append">
+                        <input type="text" id="duration" class="form-control" placeholder="Duration (ms)" v-model="duration" style="display:none" />
+                        <!--<div class="input-group-append">
                             <button v-bind:class="{btn:true, 'btn-primary':isConnected, 'btn-secondary':!isConnected }" v-on:click="publish()" v-bind:disabled="!isConnected">Submit</button>                            
-                        </div>                       
+                        </div>-->               
                     </div>
                 </div>
                  <div class="form-group">
-                    <button v-bind:class="{btn:true, 'btn-success':isConnected, 'btn-secondary':!isConnected }" v-on:click="publish(2000)" v-bind:disabled="!isConnected">2s</button>
-                    <button v-bind:class="{btn:true, 'btn-warning':isConnected, 'btn-secondary':!isConnected }" v-on:click="publish(5000)" v-bind:disabled="!isConnected">5s</button>
-                    <button v-bind:class="{btn:true, 'btn-danger':isConnected, 'btn-secondary':!isConnected }" v-on:click="publish(10000)" v-bind:disabled="!isConnected">10s</button>
+                    <button v-bind:class="{btn:true, btn-lg:true, 'btn-success':isConnected, 'btn-secondary':!isConnected }" v-on:click="publish(2000)" v-bind:disabled="!isConnected">2s</button>
+                    <button v-bind:class="{btn:true, btn-lg:true, 'btn-warning':isConnected, 'btn-secondary':!isConnected }" v-on:click="publish(5000)" v-bind:disabled="!isConnected">5s</button>
+                    <button v-bind:class="{btn:true, btn-lg:true, 'btn-danger':isConnected, 'btn-secondary':!isConnected }" v-on:click="publish(10000)" v-bind:disabled="!isConnected">10s</button>
                 </div>
                 <div class="form-group">
                     <label for="messages"><h3>Log:</h3></label>
