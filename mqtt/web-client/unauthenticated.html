@@ -34,11 +34,11 @@
                         </div>
                         <input type="text" id="duration" class="form-control" placeholder="Duration (ms)" v-model="duration" />
                         <div class="input-group-append">
-                            <button v-bind:class="{btn:true, 'btn-primary':isConnected, 'btn-secondary':!isConnected }" v-on:click="publish()" v-bind:disabled="!isConnected">Submit</button>
-                            <button v-bind:class="{btn:true, 'btn-success':isConnected, 'btn-secondary':!isConnected }" v-on:click="publish(2)" v-bind:disabled="!isConnected">2s</button>
-                            <button v-bind:class="{btn:true, 'btn-warning':isConnected, 'btn-secondary':!isConnected }" v-on:click="publish(5)" v-bind:disabled="!isConnected">5s</button>
-                            <button v-bind:class="{btn:true, 'btn-error':isConnected, 'btn-secondary':!isConnected }" v-on:click="publish(10)" v-bind:disabled="!isConnected">10s</button>
+                            <button v-bind:class="{btn:true, 'btn-primary':isConnected, 'btn-secondary':!isConnected }" v-on:click="publish()" v-bind:disabled="!isConnected">Submit</button>                            
                         </div>
+                        <button v-bind:class="{btn:true, 'btn-success':isConnected, 'btn-secondary':!isConnected }" v-on:click="publish(2)" v-bind:disabled="!isConnected">2s</button>
+                        <button v-bind:class="{btn:true, 'btn-danger':isConnected, 'btn-secondary':!isConnected }" v-on:click="publish(5)" v-bind:disabled="!isConnected">5s</button>
+                        <button v-bind:class="{btn:true, 'btn-error':isConnected, 'btn-secondary':!isConnected }" v-on:click="publish(10)" v-bind:disabled="!isConnected">10s</button>
                     </div>
                 </div>
                 <div class="form-group">
