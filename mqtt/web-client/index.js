@@ -39,9 +39,12 @@ var app = new Vue({
             },
             (message) => log(this, message));
     },
-    publish: function(){
+    publish: function(seconds){
         if(!this.isConnected)
             return;
+
+        if(seconds != null)
+          this.duration = seconds;
 
         _mqtt.publish(Topic, "{\"duration\": " + this.duration + "}");
     }
