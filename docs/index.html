@@ -16,7 +16,6 @@
         href="styles.css">
 
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     </head>
    <body>
         <div class="center fill-v" id="vueApp">
@@ -32,17 +31,17 @@
                                 </svg>
                             </span>
                         </div>
+                        <div>
+                            <button v-bind:class="{btn:true, 'btn-lg':true, 'btn-success':isConnected, 'btn-secondary':!isConnected }" v-on:click="publish(2000)" v-bind:disabled="!isConnected">2s</button>
+                            <button v-bind:class="{btn:true, 'btn-lg':true, 'btn-warning':isConnected, 'btn-secondary':!isConnected }" v-on:click="publish(5000)" v-bind:disabled="!isConnected">5s</button>
+                            <button v-bind:class="{btn:true, 'btn-lg':true, 'btn-danger':isConnected, 'btn-secondary':!isConnected }" v-on:click="publish(10000)" v-bind:disabled="!isConnected">10s</button>
+                        </div>
                         <input type="text" id="duration" class="form-control" placeholder="Duration (ms)" v-model="duration" style="display:none" />
                         <!--<div class="input-group-append">
                             <button v-bind:class="{btn:true, 'btn-primary':isConnected, 'btn-secondary':!isConnected }" v-on:click="publish()" v-bind:disabled="!isConnected">Submit</button>                            
                         </div>-->               
                     </div>
-                </div>
-                 <div class="form-group">
-                    <button v-bind:class="{btn:true, 'btn-lg':true, 'btn-success':isConnected, 'btn-secondary':!isConnected }" v-on:click="publish(2000)" v-bind:disabled="!isConnected">2s</button>
-                    <button v-bind:class="{btn:true, 'btn-lg':true, 'btn-warning':isConnected, 'btn-secondary':!isConnected }" v-on:click="publish(5000)" v-bind:disabled="!isConnected">5s</button>
-                    <button v-bind:class="{btn:true, 'btn-lg':true, 'btn-danger':isConnected, 'btn-secondary':!isConnected }" v-on:click="publish(10000)" v-bind:disabled="!isConnected">10s</button>
-                </div>
+                </div>                 
                 <div class="form-group">
                     <label for="messages"><h3>Log:</h3></label>
                     <div v-for="(value,index) in messages" v-if="index < 10" class="font-weight-lighter">
